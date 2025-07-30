@@ -157,8 +157,8 @@ export class PDFParser {
     return '';
   }
 
-  private static extractExperience(text: string, lines: string[]) {
-    const experiences = [];
+  private static extractExperience(text: string, lines: string[]): WorkExperience[] {
+    const experiences: WorkExperience[] = [];
     const experienceKeywords = ['experience', 'work', 'employment', 'career'];
     
     const experienceIndex = lines.findIndex(line => 
@@ -183,7 +183,7 @@ export class PDFParser {
       nextSectionIndex !== -1 ? nextSectionIndex : lines.length
     );
 
-    let currentExperience = null;
+    let currentExperience: WorkExperience | null = null;
     
     for (const line of experienceLines) {
       // Check if this looks like a job title or company
@@ -232,8 +232,8 @@ export class PDFParser {
     return experiences;
   }
 
-  private static extractEducation(text: string, lines: string[]) {
-    const education = [];
+  private static extractEducation(text: string, lines: string[]): Education[] {
+    const education: Education[] = [];
     const educationKeywords = ['education', 'academic', 'degree'];
     
     const educationIndex = lines.findIndex(line => 
@@ -257,7 +257,7 @@ export class PDFParser {
       nextSectionIndex !== -1 ? nextSectionIndex : lines.length
     );
 
-    let currentEducation = null;
+    let currentEducation: Education | null = null;
 
     for (const line of educationLines) {
       if (this.looksLikeDegree(line)) {
@@ -294,8 +294,8 @@ export class PDFParser {
     return education;
   }
 
-  private static extractSkills(text: string, lines: string[]) {
-    const skills = [];
+  private static extractSkills(text: string, lines: string[]): Skill[] {
+    const skills: Skill[] = [];
     const skillsKeywords = ['skills', 'technical', 'technologies', 'competencies'];
     
     const skillsIndex = lines.findIndex(line => 
@@ -339,8 +339,8 @@ export class PDFParser {
     return skills;
   }
 
-  private static extractCertifications(text: string, lines: string[]) {
-    const certifications = [];
+  private static extractCertifications(text: string, lines: string[]): Certification[] {
+    const certifications: Certification[] = [];
     const certKeywords = ['certifications', 'certificates', 'credentials'];
     
     const certIndex = lines.findIndex(line => 
@@ -384,8 +384,8 @@ export class PDFParser {
     return certifications;
   }
 
-  private static extractLanguages(text: string, lines: string[]) {
-    const languages = [];
+  private static extractLanguages(text: string, lines: string[]): Language[] {
+    const languages: Language[] = [];
     const langKeywords = ['languages', 'language'];
     
     const langIndex = lines.findIndex(line => 

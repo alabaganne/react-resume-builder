@@ -218,15 +218,15 @@ export default function Home() {
 
         {/* Desktop Layout */}
         <div className="hidden lg:flex h-[calc(100vh-80px)]">
-          <ResizablePanelGroup direction="horizontal" className="flex-1">
-            {/* Left Sidebar */}
-            <ResizablePanel defaultSize={20} minSize={15} maxSize={25}>
-              <div className="h-full bg-white border-r">
-                <div className="p-4 border-b">
-                  <h3 className="font-semibold text-gray-900">Sections</h3>
-                </div>
-                <ScrollArea className="h-full pb-4">
-                  <Tabs defaultValue="personal" orientation="vertical" className="w-full">
+          <Tabs defaultValue="personal" className="flex-1 flex">
+            <ResizablePanelGroup direction="horizontal" className="flex-1">
+              {/* Left Sidebar */}
+              <ResizablePanel defaultSize={20} minSize={15} maxSize={25}>
+                <div className="h-full bg-white border-r">
+                  <div className="p-4 border-b">
+                    <h3 className="font-semibold text-gray-900">Sections</h3>
+                  </div>
+                  <ScrollArea className="h-full pb-4">
                     <TabsList className="flex flex-col h-auto w-full space-y-1 bg-transparent p-2">
                       <TabsTrigger 
                         value="personal" 
@@ -285,40 +285,38 @@ export default function Home() {
                         Manage
                       </TabsTrigger>
                     </TabsList>
-                  </Tabs>
-                </ScrollArea>
-              </div>
-            </ResizablePanel>
-
-            <ResizableHandle withHandle />
-
-            {/* Form Panel */}
-            <ResizablePanel defaultSize={showPreview ? 40 : 80} minSize={30}>
-              <div className="h-full flex flex-col">
-                <div className="flex items-center justify-between p-4 bg-white border-b">
-                  <h2 className="text-lg font-semibold">Resume Builder</h2>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setShowPreview(!showPreview)}
-                  >
-                    {showPreview ? (
-                      <>
-                        <PanelLeftClose className="h-4 w-4 mr-2" />
-                        Hide Preview
-                      </>
-                    ) : (
-                      <>
-                        <PanelLeftOpen className="h-4 w-4 mr-2" />
-                        Show Preview
-                      </>
-                    )}
-                  </Button>
+                  </ScrollArea>
                 </div>
-                
-                <ScrollArea className="flex-1">
-                  <div className="p-6">
-                    <Tabs defaultValue="personal" className="space-y-6">
+              </ResizablePanel>
+
+              <ResizableHandle withHandle />
+
+              {/* Form Panel */}
+              <ResizablePanel defaultSize={showPreview ? 40 : 80} minSize={30}>
+                <div className="h-full flex flex-col">
+                  <div className="flex items-center justify-between p-4 bg-white border-b">
+                    <h2 className="text-lg font-semibold">Resume Builder</h2>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setShowPreview(!showPreview)}
+                    >
+                      {showPreview ? (
+                        <>
+                          <PanelLeftClose className="h-4 w-4 mr-2" />
+                          Hide Preview
+                        </>
+                      ) : (
+                        <>
+                          <PanelLeftOpen className="h-4 w-4 mr-2" />
+                          Show Preview
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                  
+                  <ScrollArea className="flex-1">
+                    <div className="p-6 space-y-6">
                       <TabsContent value="personal">
                         <PersonalInfoSection />
                       </TabsContent>
@@ -362,26 +360,26 @@ export default function Home() {
                       <TabsContent value="manage">
                         <SectionManager />
                       </TabsContent>
-                    </Tabs>
-                  </div>
-                </ScrollArea>
-              </div>
-            </ResizablePanel>
-
-            {/* Preview Panel */}
-            {showPreview && (
-              <>
-                <ResizableHandle withHandle />
-                <ResizablePanel defaultSize={40} minSize={30}>
-                  <ScrollArea className="h-full">
-                    <div className="p-6">
-                      <ResumePreview />
                     </div>
                   </ScrollArea>
-                </ResizablePanel>
-              </>
-            )}
-          </ResizablePanelGroup>
+                </div>
+              </ResizablePanel>
+
+              {/* Preview Panel */}
+              {showPreview && (
+                <>
+                  <ResizableHandle withHandle />
+                  <ResizablePanel defaultSize={40} minSize={30}>
+                    <ScrollArea className="h-full">
+                      <div className="p-6">
+                        <ResumePreview />
+                      </div>
+                    </ScrollArea>
+                  </ResizablePanel>
+                </>
+              )}
+            </ResizablePanelGroup>
+          </Tabs>
         </div>
         
         <Toaster />
