@@ -1,5 +1,5 @@
 import * as pdfjsLib from 'pdfjs-dist';
-import { ResumeData } from './resume-types';
+import { ResumeData, WorkExperience, Education, Skill, Certification, Language } from './resume-types';
 import { StorageManager } from './storage';
 
 // Set up PDF.js worker
@@ -219,7 +219,7 @@ export class PDFParser {
             currentExperience.location = parts[1];
           }
         }
-      } else if (currentExperience && line.startsWith('•') || line.startsWith('-')) {
+      } else if (currentExperience && (line.startsWith('•') || line.startsWith('-'))) {
         // This is a bullet point
         currentExperience.description.push(line.replace(/^[•-]\s*/, ''));
       }

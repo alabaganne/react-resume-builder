@@ -296,7 +296,9 @@ export const ResumePreview: React.FC = () => {
       </CardHeader>
       <CardContent className="p-4 lg:p-6">
         <div className="bg-white border rounded-lg p-4 lg:p-8 max-w-4xl mx-auto min-h-[600px] lg:min-h-[800px] shadow-sm">
-          {visibleSections.map((section) => renderSection(section))}
+          {visibleSections.map((section) => (
+            <div key={section.id}>{renderSection(section)}</div>
+          ))}
         </div>
       </CardContent>
     </Card>
