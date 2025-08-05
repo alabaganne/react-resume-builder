@@ -4,7 +4,9 @@
       "Bash(npm run build:*)",
       "Bash(npx update-browserslist-db:*)",
       "Bash(npm install:*)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "Bash(npm run lint)",
+      "Bash(git add:*)"
     ],
     "deny": []
   }

@@ -11,7 +11,7 @@ import { Separator } from '@/components/ui/separator';
 import { useResume } from '../ResumeContext';
 import { WorkExperience } from '@/lib/resume-types';
 import { StorageManager } from '@/lib/storage';
-import { Briefcase, Plus, Trash2, GripVertical } from 'lucide-react';
+import { Briefcase, Plus, Trash2, GripVertical, Edit2 } from 'lucide-react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 export const ExperienceSection: React.FC = () => {
@@ -136,7 +136,7 @@ export const ExperienceSection: React.FC = () => {
           <div className="text-center py-8 text-gray-500">
             <Briefcase className="h-12 w-12 mx-auto mb-4 opacity-50" />
             <p>No work experience added yet.</p>
-            <p className="text-sm">Click "Add Experience" to get started.</p>
+            <p className="text-sm">Click &quot;Add Experience&quot; to get started.</p>
           </div>
         ) : (
           <DragDropContext onDragEnd={handleDragEnd}>
@@ -166,15 +166,38 @@ export const ExperienceSection: React.FC = () => {
                                 {exp.company && ` at ${exp.company}`}
                               </h3>
                             </div>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => removeExperience(exp.id)}
-                              className="text-red-600 hover:text-red-700 hover:bg-red-50"
-                            >
-                              <Trash2 className="h-4 w-4" />
-                            </Button>
+                            <div className="flex items-center gap-2">
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => toggleExpanded(exp.id)}
+                                className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
+                              >
+                                <Edit2 className="h-4 w-4" />
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => removeExperience(exp.id)}
+                                className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                              >
+                                <Trash2 className="h-4 w-4" />
+                              </Button>
+                            </div>
                           </div>
+
+                          {!expandedItems.has(exp.id) && exp.position && (
+                            <div className="text-sm text-gray-600 space-y-1">
+                              <p>{exp.startDate && `${new Date(exp.startDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}`} 
+                                {exp.endDate && ` - ${new Date(exp.endDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}`}
+                                {exp.current && ' - Present'}
+                                {exp.location && ` • ${exp.location}`}
+                              </p>
+                              {exp.description.filter(bullet => bullet.trim()).map((bullet, idx) => (
+                                <p key={idx} className="text-gray-700">• {bullet}</p>
+                              ))}
+                            </div>
+                          )}
 
                           {(expandedItems.has(exp.id) || !exp.position) && (
                             <div className="space-y-4">
